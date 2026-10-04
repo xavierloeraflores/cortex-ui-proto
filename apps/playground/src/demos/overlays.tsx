@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 export function OverlaysDemo() {
+  const [focusMinutes, setFocusMinutes] = useState([120]);
   return (
     <div className="demo-stack">
       <p className="muted">Focused spaces for the next step.</p>
@@ -95,10 +96,12 @@ export function OverlaysDemo() {
                 </UI.DrawerDescription>
               </UI.DrawerHeader>
               <p className="my-6 text-center text-5xl text-primary">
-                120 <span className="text-sm text-muted-foreground">min</span>
+                {focusMinutes[0]}{" "}
+                <span className="text-sm text-muted-foreground">min</span>
               </p>
               <UI.Slider
-                defaultValue={[120]}
+                value={focusMinutes}
+                onValueChange={setFocusMinutes}
                 max={240}
                 step={15}
                 aria-label="Focus duration"

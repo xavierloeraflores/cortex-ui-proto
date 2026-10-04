@@ -197,7 +197,7 @@ export function LayoutDemo() {
             01 / Panel
           </div>
         </UI.ResizablePanel>
-        <UI.ResizableHandle withHandle />
+        <UI.ResizableHandle withHandle aria-label="Resize panels" />
         <UI.ResizablePanel defaultSize="60%" minSize="20%">
           <UI.ScrollArea className="h-28">
             <div className="space-y-3 p-3">

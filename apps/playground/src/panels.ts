@@ -1,0 +1,260 @@
+import type { ComponentType } from "react";
+import type { componentCatalog } from "@cortex/ui";
+import {
+  ActionsDemo,
+  CalendarDemo,
+  EditorDemo,
+  GoalDemo,
+  OtpDemo,
+  SelectDemo,
+  SelectionDemo,
+} from "./demos/controls";
+import {
+  ChartDemo,
+  EmptyDemo,
+  IdentityDemo,
+  LoadingDemo,
+  TableDemo,
+} from "./demos/data";
+import {
+  FeedbackDemo,
+  FloatingDemo,
+  MenuDemo,
+  OverlaysDemo,
+} from "./demos/overlays";
+import {
+  DisclosureDemo,
+  LayoutDemo,
+  MediaDemo,
+  NavigationDemo,
+  PaginationDemo,
+  TabsDemo,
+  TypeDemo,
+} from "./demos/layout";
+import {
+  ConversationDemo,
+  FormDemo,
+  QuestionnaireDemo,
+} from "./demos/conversation";
+
+type ComponentName = (typeof componentCatalog)[number]["name"];
+export type PanelDefinition = {
+  id: string;
+  title: string;
+  subtitle: string;
+  tag: string;
+  components: ComponentName[];
+  demo: ComponentType;
+  wide?: boolean;
+};
+export const panels: PanelDefinition[] = [
+  {
+    id: "actions",
+    title: "Essential components",
+    subtitle: "Small details. A distinct language.",
+    tag: "UI",
+    components: ["button", "input", "input-group", "kbd"],
+    demo: ActionsDemo,
+  },
+  {
+    id: "activity",
+    title: "Contribution history",
+    subtitle: "Six months of building in the open.",
+    tag: "STATS",
+    components: ["chart"],
+    demo: ChartDemo,
+  },
+  {
+    id: "milestone",
+    title: "Set a new milestone",
+    subtitle: "Give your next idea a destination.",
+    tag: "GOALS",
+    components: ["field", "label", "date-picker"],
+    demo: GoalDemo,
+  },
+  {
+    id: "calendar",
+    title: "Make time for it",
+    subtitle: "A little space for what comes next.",
+    tag: "DATE",
+    components: ["calendar"],
+    demo: CalendarDemo,
+  },
+  {
+    id: "navigation",
+    title: "Find your way",
+    subtitle: "Everything you need, in one place.",
+    tag: "NAV",
+    components: ["sidebar", "breadcrumb", "navigation-menu"],
+    demo: NavigationDemo,
+  },
+  {
+    id: "conversation",
+    title: "A space for conversation",
+    subtitle: "Ideas begin with a question.",
+    tag: "AI",
+    components: ["message", "bubble", "attachment", "message-scroller"],
+    demo: ConversationDemo,
+    wide: true,
+  },
+  {
+    id: "identity",
+    title: "Better, together",
+    subtitle: "People, presence, and shared progress.",
+    tag: "PEOPLE",
+    components: ["avatar", "badge", "item", "marker"],
+    demo: IdentityDemo,
+  },
+  {
+    id: "controls",
+    title: "Fine-tune your system",
+    subtitle: "Every setting within reach.",
+    tag: "INPUT",
+    components: ["switch", "checkbox", "radio-group", "slider"],
+    demo: SelectionDemo,
+  },
+  {
+    id: "select",
+    title: "Find the right fit",
+    subtitle: "A choice for every kind of decision.",
+    tag: "SELECT",
+    components: ["combobox", "select", "native-select"],
+    demo: SelectDemo,
+  },
+  {
+    id: "editor",
+    title: "Shape the thought",
+    subtitle: "Tools for the words in your head.",
+    tag: "EDIT",
+    components: ["toggle", "toggle-group", "button-group", "textarea"],
+    demo: EditorDemo,
+  },
+  {
+    id: "table",
+    title: "Project signals",
+    subtitle: "Filter, sort, and find the next move.",
+    tag: "DATA",
+    components: ["data-table", "table"],
+    demo: TableDemo,
+  },
+  {
+    id: "overlays",
+    title: "A moment of focus",
+    subtitle: "Give important actions their space.",
+    tag: "LAYER",
+    components: ["dialog", "sheet", "drawer", "alert-dialog"],
+    demo: OverlaysDemo,
+  },
+  {
+    id: "floating",
+    title: "A little more context",
+    subtitle: "The right detail, right where you need it.",
+    tag: "INFO",
+    components: ["popover", "hover-card", "tooltip"],
+    demo: FloatingDemo,
+  },
+  {
+    id: "menus",
+    title: "Actions in context",
+    subtitle: "One step from intention to action.",
+    tag: "MENU",
+    components: ["menubar", "context-menu", "dropdown-menu"],
+    demo: MenuDemo,
+  },
+  {
+    id: "feedback",
+    title: "Keep the signal clear",
+    subtitle: "Acknowledge what just happened.",
+    tag: "STATUS",
+    components: ["alert", "toast", "sonner"],
+    demo: FeedbackDemo,
+  },
+  {
+    id: "disclosure",
+    title: "Details, on demand",
+    subtitle: "Open only what you need.",
+    tag: "REVEAL",
+    components: ["accordion", "collapsible"],
+    demo: DisclosureDemo,
+  },
+  {
+    id: "tabs",
+    title: "A different perspective",
+    subtitle: "The same system. Another point of view.",
+    tag: "VIEW",
+    components: ["tabs", "direction"],
+    demo: TabsDemo,
+  },
+  {
+    id: "layout",
+    title: "Room to rearrange",
+    subtitle: "Give the content its own space.",
+    tag: "LAYOUT",
+    components: ["resizable", "scroll-area", "separator"],
+    demo: LayoutDemo,
+  },
+  {
+    id: "media",
+    title: "Studies in motion",
+    subtitle: "Three expressions of the same idea.",
+    tag: "MEDIA",
+    components: ["carousel", "aspect-ratio"],
+    demo: MediaDemo,
+  },
+  {
+    id: "questionnaire",
+    title: "Choose a direction",
+    subtitle: "A short conversation before we build.",
+    tag: "ASK",
+    components: ["questionnaire"],
+    demo: QuestionnaireDemo,
+  },
+  {
+    id: "otp",
+    title: "Establish a connection",
+    subtitle: "A simple checkpoint before entry.",
+    tag: "ACCESS",
+    components: ["input-otp"],
+    demo: OtpDemo,
+  },
+  {
+    id: "form",
+    title: "Stay on the frequency",
+    subtitle: "Helpful feedback at every step.",
+    tag: "FORM",
+    components: ["form"],
+    demo: FormDemo,
+  },
+  {
+    id: "loading",
+    title: "Work in progress",
+    subtitle: "Make the waiting part of the experience.",
+    tag: "SYNC",
+    components: ["skeleton", "progress", "spinner"],
+    demo: LoadingDemo,
+  },
+  {
+    id: "empty",
+    title: "The next beginning",
+    subtitle: "An empty state, full of possibility.",
+    tag: "EMPTY",
+    components: ["empty"],
+    demo: EmptyDemo,
+  },
+  {
+    id: "pagination",
+    title: "One page at a time",
+    subtitle: "Structure for a growing collection.",
+    tag: "PAGES",
+    components: ["pagination", "card"],
+    demo: PaginationDemo,
+  },
+  {
+    id: "type",
+    title: "Words with purpose",
+    subtitle: "A clear hierarchy, from the first line.",
+    tag: "TYPE",
+    components: ["typography"],
+    demo: TypeDemo,
+  },
+];

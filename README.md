@@ -24,7 +24,7 @@ The build explicitly sets `NODE_ENV=production`. Vite prints the development or 
 
 The playground uses Vite and runs entirely in the browser. Build it locally and commit the generated HTML, JavaScript, CSS, and fonts to `docs/`. GitHub Pages can serve those files without a Node.js server or a Vercel deployment.
 
-The Pages setup includes commands and an empty `docs/.nojekyll` marker. It does not include a generated website. Run the following steps when you are ready to publish.
+The generated website is committed in `docs/`, including HTML, bundled assets, local fonts, and the `.nojekyll` marker. Rebuild it after source updates using the steps below.
 
 ### Generate and preview
 
@@ -67,7 +67,7 @@ Once the generated files are on `main`:
 3. Select **main** and **/docs**, then save.
 4. Wait for GitHub's Pages deployment to finish. Visit [the site's expected address](https://xavierloeraflores.github.io/cortex-ui-proto/) and repeat the preview checks.
 
-GitHub deploys the committed files. No custom workflow needs to install dependencies or run Vite. Source-only commits do not regenerate the hosted website. Publishing requires `docs/index.html`; the initial `.nojekyll` marker alone is not a website.
+GitHub deploys the committed files. No custom workflow needs to install dependencies or run Vite. Source-only commits do not regenerate the hosted website. Publishing requires the generated `docs/index.html` and its assets.
 
 See GitHub's [publishing source instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) and Vite's [GitHub Pages base-path guidance](https://vite.dev/guide/static-deploy.html#github-pages).
 

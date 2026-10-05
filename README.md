@@ -27,8 +27,9 @@ The build explicitly sets `NODE_ENV=production`. Vite prints the development or 
 - `packages/ui/src/catalog.ts`: the complete component inventory.
 - `apps/playground/src/demos`: interactive examples grouped by component family.
 - `apps/playground/src/panels.ts`: the mapping between components and their overview panels.
-- `docs/component-library.md`: source attribution, scope, and visual direction.
-- `docs/verification.md`: checks and interaction coverage.
+- `guides/component-library.md`: source attribution, scope, and visual direction.
+- `guides/verification.md`: checks and interaction coverage.
+- `docs/`: reserved for generated GitHub Pages output that can be committed. Keep developer documentation in `guides/`.
 
 Both packages remain private. The playground consumes the UI package's TypeScript directly. There is no registry or publishing setup.
 

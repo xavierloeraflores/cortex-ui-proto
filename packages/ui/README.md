@@ -34,3 +34,15 @@ For an inline component preview, put `.cortex-theme` on a container and override
 variables there, or give it `data-cortex-theme`. That redeclares the derived tokens
 at the container so they use its primary color. Portals render outside that
 container and use the document theme. Use document-level theming for the full app.
+
+## Floating theme preview
+
+```tsx
+import { ThemePreview } from "@cortex/ui/theme-preview";
+
+<ThemePreview />
+```
+
+Mount once in the app shell. The fixed trigger opens a keyboard-accessible color
+picker. Selection updates the document theme, including portals. Reset, unmount,
+or reload restores the original theme. Selections are not saved.

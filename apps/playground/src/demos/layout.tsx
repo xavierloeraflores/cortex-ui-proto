@@ -156,7 +156,7 @@ export function TabsDemo() {
         </UI.TabsContent>
         <UI.TabsContent value="tokens" className="tab-content">
           <div className="demo-row">
-            {["#89f7ef", "#4baca7", "#284347", "#101d20"].map((c) => (
+            {["var(--primary)", "var(--chart-2)", "var(--border)", "var(--muted)"].map((c) => (
               <span
                 key={c}
                 className="size-8 rounded border"

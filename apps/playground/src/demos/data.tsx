@@ -49,7 +49,7 @@ export function ChartDemo() {
             <defs>
               <linearGradient id="bar-glow" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stopColor="var(--primary)" />
-                <stop offset="1" stopColor="#215356" />
+                <stop offset="1" stopColor="var(--chart-3)" />
               </linearGradient>
             </defs>
             <CartesianGrid vertical={false} strokeDasharray="2 4" />

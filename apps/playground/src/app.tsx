@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Box, Crosshair, Search } from "lucide-react";
 import * as UI from "@cortex/ui";
+import { Components } from "./pages/components";
 import { Home } from "./pages/home";
 import { Showcase } from "./pages/showcase";
 
@@ -40,7 +41,7 @@ export function App() {
       <div className="topbar-actions"><button aria-label="Find a component" className="search-trigger" onClick={() => setSearchOpen(true)}><Search size={15} /><span>Search components</span><UI.Kbd>⌘ K</UI.Kbd></button></div>
     </header>
     <main id="main-content" tabIndex={-1}>
-      {path === "/" ? <Home /> : path === "/showcase" ? <Showcase /> : <div className="page-heading"><h1>{path === "/components" ? "Component guide" : path === "/examples" ? "Real-world examples" : "Page not found"}</h1><p>This page is being assembled. Explore the live components in the meantime.</p><UI.Button asChild><a href="#/showcase">Open showcase <ArrowUpRight /></a></UI.Button></div>}
+      {path === "/" ? <Home /> : path === "/showcase" ? <Showcase /> : path === "/components" ? <Components key={route} selected={new URLSearchParams(route.split("?")[1]).get("component") ?? undefined} /> : <div className="page-heading"><h1>{path === "/components" ? "Component guide" : path === "/examples" ? "Real-world examples" : "Page not found"}</h1><p>This page is being assembled. Explore the live components in the meantime.</p><UI.Button asChild><a href="#/showcase">Open showcase <ArrowUpRight /></a></UI.Button></div>}
     </main>
     <footer className="site-footer"><a href="#/" className="wordmark"><Crosshair size={16} />CORTEX UI</a><span className="muted">React components. Ready to explore.</span><div className="footer-rule" /><a className="muted" href="https://github.com/xavierloeraflores/cortex-ui-proto">View source ↗</a></footer>
     <UI.CommandDialog open={searchOpen} onOpenChange={setSearchOpen} title="Find a component" description="Search the component guide."><UI.CommandInput placeholder="Search 66 components…" /><UI.CommandList><UI.CommandEmpty>No matching component.</UI.CommandEmpty>{Array.from(new Set(UI.componentCatalog.map(c => c.category))).map(category => <UI.CommandGroup heading={category} key={category}>{UI.componentCatalog.filter(c => c.category === category).map(c => <UI.CommandItem key={c.name} value={`${c.label} ${c.category}`} onSelect={() => { setSearchOpen(false); window.location.hash = `/components?component=${c.name}`; }}><Box />{c.label}</UI.CommandItem>)}</UI.CommandGroup>)}</UI.CommandList></UI.CommandDialog>

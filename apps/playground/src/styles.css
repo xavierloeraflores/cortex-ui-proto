@@ -872,3 +872,29 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--primary); outli
 @media (max-width: 960px) { .site-topbar nav { display: flex; } .site-topbar { flex-wrap: wrap; height: auto; padding-top: 18px; padding-bottom: 0; gap: 12px; } .site-topbar nav { order: 3; width: 100%; height: 48px; gap: 26px; } .site-topbar nav .active::after { bottom: 0; } .landing-hero { padding: 50px 0; gap: 26px; } .preview-body { padding: 18px; } .entry-card { padding: 22px; } }
 @media (max-width: 720px) { .landing-hero, .getting-started { grid-template-columns: 1fr; gap: 40px; } .landing-copy h1 { font-size: 53px; } .product-preview { transform: none; } .entry-grid { grid-template-columns: 1fr; } .home-page, .page-container { padding-inline: 20px; } .library-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; } .section-heading { display: block; } .section-heading > p { margin-top: 15px; } .home-section { padding-block: 45px; } .page-heading { padding: 38px 20px 28px; } .getting-started { padding-bottom: 45px; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
+.guide-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 45px; padding-bottom: 70px; }
+.guide-sidebar { position: sticky; top: 24px; height: fit-content; display: grid; gap: 14px; }
+.guide-links { max-height: 65vh; overflow: auto; }
+.guide-links a { display: flex; justify-content: space-between; padding: 9px 12px; font-size: 12px; color: var(--muted-foreground); border-radius: 4px; }
+.guide-links a:hover, .guide-links a.selected { background: var(--accent); color: var(--primary); }
+.guide-content { min-width: 0; }
+.guide-content .section-heading h2 { font-size: 23px; }
+.component-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.component-card { padding: 22px; display: flex; flex-direction: column; border: 1px solid var(--border); background: var(--card); border-radius: 7px; }
+.component-card:hover { border-color: var(--primary); }
+.component-card h3 { display: flex; justify-content: space-between; font-size: 18px; margin: 12px 0; }
+.component-card h3 svg { color: var(--primary); }
+.component-card p { font-size: 13px; color: var(--muted-foreground); line-height: 1.7; flex: 1; }
+.component-variation { border-top: 1px solid var(--border); padding-top: 13px; margin-top: 20px; color: var(--primary); font: 10px/1.6 var(--font-mono); }
+.back-link { color: var(--primary); font-size: 12px; }
+.detail-title { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; }
+.detail-title h2 { font-size: 38px; letter-spacing: -1px; margin: 13px 0; }
+.detail-description { font-size: 18px; color: var(--muted-foreground); margin-bottom: 30px; }
+.guide-content > h3 { margin: 25px 0 12px; font-size: 16px; }
+.variation-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.variation-list li { display: flex; gap: 8px; align-items: center; border: 1px solid var(--border); border-radius: 5px; padding: 10px; font-size: 12px; }
+.variation-list svg { color: var(--primary); flex-shrink: 0; }
+.code-heading { margin: 28px 0 12px; }
+.usage-code { margin: 15px 0 32px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.guide-demo { border: 1px solid var(--border); border-radius: 8px; background: var(--card); padding: 28px; max-width: 760px; }
+@media (max-width: 720px) { .guide-layout { grid-template-columns: 1fr; gap: 30px; } .guide-sidebar { position: static; } .guide-links { display: none; } .component-cards { grid-template-columns: 1fr; } .guide-demo { padding: 18px; } }

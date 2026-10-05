@@ -1,6 +1,6 @@
 # Cortex UI
 
-A React playground and shared library of 66 components, styled with dark surfaces, cyan accents, fine borders, and technical typography. The single-page workbench shows every component through 26 demo panels and a command palette.
+A React playground and shared library of 66 components, styled with dark surfaces, cyan accents, fine borders, and technical typography. The site includes a focused homepage, a searchable component guide with usage snippets and variations, the original 26-panel showcase wall, and five interactive product examples.
 
 ## Run locally
 
@@ -71,11 +71,24 @@ GitHub deploys the committed files. No custom workflow needs to install dependen
 
 See GitHub's [publishing source instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) and Vite's [GitHub Pages base-path guidance](https://vite.dev/guide/static-deploy.html#github-pages).
 
+## Explore the site
+
+- `#/`: library overview and starting points.
+- `#/components`: searchable catalog of all 66 components. Each detail page includes a description, usage, variations, source link, and a live example.
+- `#/showcase`: the original interactive component wall.
+- `#/examples`: five product previews: analytics, project board, customer inbox, account settings, and session booking.
+
+The examples use local state and sample data. You can change reporting periods and export a CSV, create and move tasks, reply to conversations, save preferences, and complete a mock booking. They reset when you leave the example or reload. They do not send messages, charge payments, or create real appointments.
+
+Routes use URL hashes so direct links, reloads, and browser history work on GitHub Pages without a server fallback. The floating theme preview applies across every page.
+
 ## Workspace
 
 - `packages/ui/src/components`: all 66 component modules, exported from `@cortex/ui` and individual subpaths.
 - `packages/ui/src/styles.css`: shared theme tokens and component styling, including portaled menus and dialogs.
 - `packages/ui/src/catalog.ts`: the complete component inventory.
+- `apps/playground/src/pages`: homepage, component guide, showcase, and product examples.
+- `apps/playground/src/component-docs.ts`: typed usage notes, variations, and snippets for the complete catalog.
 - `apps/playground/src/demos`: interactive examples grouped by component family.
 - `apps/playground/src/panels.ts`: the mapping between components and their overview panels.
 - `guides/component-library.md`: source attribution, scope, and visual direction.
@@ -91,12 +104,12 @@ import { Button } from "@cortex/ui";
 // Individual imports also work: import { Button } from "@cortex/ui/button";
 import "@cortex/ui/styles.css";
 
-<Button variant="outline">Create project</Button>
+<Button variant="outline">Create project</Button>;
 ```
 
 Import styles once in the consuming app. Tailwind v4 scans the UI package explicitly. The playground bundles Space Grotesk and IBM Plex Mono locally; other consumers can load those fonts or override the font tokens. Use `.dark` on the document root for the dark variants.
 
-The component index and `⌘K` / `Ctrl+K` search jump to each live demo. Example actions run locally; the gallery has no AI service, account system, or persistence.
+The component guide and `⌘K` / `Ctrl+K` search open a component detail page with usage notes, variations, and a live demo. Example actions run locally; the gallery has no AI service, account system, or persistence.
 
 ## Reference and attribution
 

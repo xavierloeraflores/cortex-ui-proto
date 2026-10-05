@@ -30,5 +30,21 @@ function Panel({ panel, index }: { panel: PanelDefinition; index: number }) {
   );
 }
 export function Showcase() {
-  return <><div className="page-heading"><p className="eyebrow">THE LIVE WORKBENCH</p><h1>Every component. In action.</h1><p>Explore the original wall of interactive demos. Click, type, and try things out.</p></div><div className="panel-grid">{panels.map((panel, index) => <Panel key={panel.id} panel={panel} index={index} />)}</div></>;
+  return (
+    <>
+      <div className="page-heading">
+        <p className="eyebrow">THE LIVE WORKBENCH</p>
+        <h1>Every component. In action.</h1>
+        <p>
+          Explore the original wall of interactive demos. Click, type, and try
+          things out.
+        </p>
+      </div>
+      <div className="panel-grid">
+        {panels.map((panel, index) => (
+          <Panel key={panel.id} panel={panel} index={index} />
+        ))}
+      </div>
+    </>
+  );
 }

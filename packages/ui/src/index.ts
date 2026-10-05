@@ -67,3 +67,4 @@ export * from "./components/toggle-group";
 export * from "./components/toggle";
 export * from "./components/tooltip";
 export * from "./components/typography";
+export * from "./components/theme-preview";

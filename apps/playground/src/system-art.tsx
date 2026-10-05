@@ -8,8 +8,8 @@ export function SystemArt() {
     >
       <defs>
         <radialGradient id="art-glow">
-          <stop stopColor="#89f7ef" stopOpacity=".14" />
-          <stop offset="1" stopColor="#89f7ef" stopOpacity="0" />
+          <stop stopColor="var(--primary)" stopOpacity=".14" />
+          <stop offset="1" stopColor="var(--primary)" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="art-line"
@@ -19,13 +19,13 @@ export function SystemArt() {
           y2="250"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#b5fff6" stopOpacity=".8" />
-          <stop offset=".55" stopColor="#67d9d5" stopOpacity=".35" />
-          <stop offset="1" stopColor="#5f6b94" stopOpacity=".5" />
+          <stop stopColor="var(--primary-gradient-start)" stopOpacity=".8" />
+          <stop offset=".55" stopColor="var(--chart-2)" stopOpacity=".35" />
+          <stop offset="1" stopColor="var(--chart-5)" stopOpacity=".5" />
         </linearGradient>
       </defs>
       <circle cx="163" cy="141" r="130" fill="url(#art-glow)" />
-      <g stroke="#396c70" strokeWidth=".55">
+      <g stroke="var(--border)" strokeWidth=".55">
         <circle cx="164" cy="140" r="122" strokeDasharray="2 8" />
         <path
           d="M9 140h303M164 8v270M38 44l245 201M283 44 40 245"
@@ -33,7 +33,7 @@ export function SystemArt() {
         />
         <path
           d="M49 36h-20v20M279 237v20h-20"
-          stroke="#89f7ef"
+          stroke="var(--primary)"
           strokeWidth="1.4"
         />
       </g>
@@ -56,17 +56,17 @@ export function SystemArt() {
       </g>
       <path
         d="M168 178q-34 59-17 106M171 184q-21 53-15 100"
-        stroke="#74ded8"
+        stroke="var(--primary-gradient-end)"
         strokeWidth=".7"
       />
-      <g fill="#89f7ef">
+      <g fill="var(--primary)">
         <rect x="27" y="55" width="3" height="3" />
         <rect x="277" y="222" width="4" height="4" />
       </g>
       <text
         x="210"
         y="276"
-        fill="#79abaa"
+        fill="var(--muted-foreground)"
         fontFamily="monospace"
         fontSize="7"
         letterSpacing="1.5"
@@ -79,7 +79,7 @@ export function SystemArt() {
 export function Radar() {
   return (
     <svg viewBox="0 0 150 76" fill="none" aria-hidden="true">
-      <g stroke="#65c7c6" strokeWidth=".6">
+      <g stroke="var(--chart-2)" strokeWidth=".6">
         <ellipse cx="75" cy="38" rx="66" ry="28" />
         <ellipse cx="75" cy="38" rx="42" ry="28" />
         <ellipse cx="75" cy="38" rx="18" ry="28" />

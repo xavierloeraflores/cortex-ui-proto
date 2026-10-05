@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "NODE_ENV=production vite build",
+    "build:pages": "NODE_ENV=production vite build --config vite.pages.config.ts",
     "preview": "vite preview --host 127.0.0.1",
+    "preview:pages": "vite preview --config vite.pages.config.ts --host 127.0.0.1",
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {

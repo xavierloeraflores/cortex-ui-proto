@@ -9,7 +9,9 @@
   "scripts": {
     "dev": "pnpm --filter @cortex/playground dev",
     "build": "pnpm typecheck && pnpm --filter @cortex/playground build",
+    "build:pages": "pnpm typecheck && pnpm --filter @cortex/playground build:pages",
     "preview": "pnpm --filter @cortex/playground preview",
+    "preview:pages": "pnpm --filter @cortex/playground preview:pages",
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint ."
   },

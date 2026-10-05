@@ -20,6 +20,57 @@ pnpm preview
 
 The build explicitly sets `NODE_ENV=production`. Vite prints the development or production-preview URL.
 
+## Build for GitHub Pages
+
+The playground uses Vite and runs entirely in the browser. Build it locally and commit the generated HTML, JavaScript, CSS, and fonts to `docs/`. GitHub Pages can serve those files without a Node.js server or a Vercel deployment.
+
+The Pages setup includes commands and an empty `docs/.nojekyll` marker. It does not include a generated website. Run the following steps when you are ready to publish.
+
+### Generate and preview
+
+From the repository root, using the Node.js and pnpm versions listed above:
+
+```sh
+pnpm install --frozen-lockfile
+pnpm lint
+pnpm build:pages
+pnpm preview:pages
+```
+
+`build:pages` type-checks the workspace, sets `NODE_ENV=production`, and builds into the repository's `docs/` directory. The build empties that directory before writing its output, removing stale assets. Keep handwritten documentation in `guides/`. Put files that must survive regeneration in `apps/playground/public/`; Vite copies them into the output, including `.nojekyll` to disable Jekyll processing.
+
+Open the preview URL Vite prints, normally `http://127.0.0.1:4173/cortex-ui-proto/`. Check fonts, styling, demo navigation, and interactive controls. Reload the page and check the browser console and network panel for errors or missing assets. Stop the preview with `Ctrl+C`.
+
+The dedicated configuration in `apps/playground/vite.pages.config.ts` sets `base` to `/cortex-ui-proto/` for this repository's project URL. If the repository name changes, update it to `/<new-repository-name>/` before rebuilding. A user site or custom domain served at its root needs `base: "/"`. The regular `pnpm build` and `pnpm preview` commands continue to use `apps/playground/dist/` and the root URL.
+
+### Commit the generated site
+
+After reviewing and committing any source changes, review the generated output on your working branch:
+
+```sh
+git status --short
+git add -A -- docs
+git diff --cached --stat
+git diff --cached -- docs/index.html
+git commit -m "Build static site for GitHub Pages"
+git push -u origin HEAD
+```
+
+Commit all of `docs/`, including `index.html`, `assets/`, `.nojekyll`, and deleted assets from the previous build. This directory is intentionally not ignored by Git. Merge the branch into `main` before publishing from `main`. Repeat the build, preview, and output commit whenever source changes should reach the hosted site.
+
+### Enable publishing on GitHub
+
+Once the generated files are on `main`:
+
+1. Open the repository's **Settings > Pages**.
+2. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
+3. Select **main** and **/docs**, then save.
+4. Wait for GitHub's Pages deployment to finish. Visit [the site's expected address](https://xavierloeraflores.github.io/cortex-ui-proto/) and repeat the preview checks.
+
+GitHub deploys the committed files. No custom workflow needs to install dependencies or run Vite. Source-only commits do not regenerate the hosted website. Publishing requires `docs/index.html`; the initial `.nojekyll` marker alone is not a website.
+
+See GitHub's [publishing source instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) and Vite's [GitHub Pages base-path guidance](https://vite.dev/guide/static-deploy.html#github-pages).
+
 ## Workspace
 
 - `packages/ui/src/components`: all 66 component modules, exported from `@cortex/ui` and individual subpaths.

@@ -20,7 +20,7 @@ export function NavigationDemo() {
       <UI.Breadcrumb>
         <UI.BreadcrumbList>
           <UI.BreadcrumbItem>
-            <UI.BreadcrumbLink href="#">Cortex</UI.BreadcrumbLink>
+            <UI.BreadcrumbLink href="#/">Cortex</UI.BreadcrumbLink>
           </UI.BreadcrumbItem>
           <UI.BreadcrumbSeparator />
           <UI.BreadcrumbItem>
@@ -82,7 +82,7 @@ export function NavigationDemo() {
             </UI.NavigationMenuContent>
           </UI.NavigationMenuItem>
           <UI.NavigationMenuItem>
-            <UI.NavigationMenuLink href="#component-index" className="text-xs">
+            <UI.NavigationMenuLink href="#/components" className="text-xs">
               Full index <ArrowRight size={12} />
             </UI.NavigationMenuLink>
           </UI.NavigationMenuItem>
@@ -156,7 +156,12 @@ export function TabsDemo() {
         </UI.TabsContent>
         <UI.TabsContent value="tokens" className="tab-content">
           <div className="demo-row">
-            {["var(--primary)", "var(--chart-2)", "var(--border)", "var(--muted)"].map((c) => (
+            {[
+              "var(--primary)",
+              "var(--chart-2)",
+              "var(--border)",
+              "var(--muted)",
+            ].map((c) => (
               <span
                 key={c}
                 className="size-8 rounded border"

@@ -27,3 +27,13 @@ Exercised data-table filtering, its empty state, sorting, and pagination. Checke
 Checked local chat messages, attachment removal, message-scroller content, questionnaire required-answer validation, multi-choice answers, and submission. Checked form validation and toast feedback. Inspected the production browser console for errors and warnings.
 
 This is component-level verification in the local in-app browser. It is not an exhaustive assistive-technology or cross-browser certification. Example business actions are deliberately local previews.
+
+## Site pages update, October 5, 2026
+
+- `pnpm lint`, `pnpm typecheck`, and the production `pnpm build` pass.
+- All 66 guide snippets were compiled against the local UI package in a temporary TSX file; the temporary file was removed afterward.
+- All 66 component detail pages rendered in the browser without console errors or warnings.
+- Verified component filtering and command search, including navigation to the Date Picker guide.
+- Verified project creation, filtering, and moving a task into progress; inbox replies and resolution; profile and notification saves; analytics period changes; and a complete mock booking.
+- Inspected desktop and mobile layouts. At a 390px browser viewport, the homepage, component guide, showcase, example gallery, and all five examples had no horizontal document overflow.
+- The examples use local state. No external account, message, payment, or booking service is connected.

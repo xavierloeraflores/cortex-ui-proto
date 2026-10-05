@@ -1,0 +1,242 @@
+import { useState } from "react";
+import { ArrowUpRight, Check, Copy, Search } from "lucide-react";
+import * as UI from "@cortex/ui";
+import { componentDocs, type ComponentName } from "../component-docs";
+import { panels } from "../panels";
+
+export function Components({ selected }: { selected?: string }) {
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("All components");
+  const [copied, setCopied] = useState(false);
+  const component = UI.componentCatalog.find((c) => c.name === selected);
+  const guide = component ? componentDocs[component.name] : undefined;
+  const filtered = UI.componentCatalog.filter(
+    (c) =>
+      (category === "All components" || category === c.category) &&
+      `${c.label} ${componentDocs[c.name].description}`
+        .toLowerCase()
+        .includes(query.toLowerCase()),
+  );
+  const panel = panels.find((p) =>
+    p.components.includes(selected as ComponentName),
+  );
+  const Demo = panel?.demo;
+  return (
+    <>
+      <div className="page-heading">
+        <p className="eyebrow">THE COMPONENT GUIDE</p>
+        <h1>Small parts. Useful details.</h1>
+        <p>
+          Find the right component, learn when to use it, and explore its
+          variations. All 66 components share the same theme.
+        </p>
+      </div>
+      <div
+        className={`guide-layout page-container ${component ? "detail-open" : ""}`}
+      >
+        <aside className="guide-sidebar">
+          <UI.InputGroup>
+            <UI.InputGroupAddon>
+              <Search />
+            </UI.InputGroupAddon>
+            <UI.InputGroupInput
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search components…"
+              aria-label="Filter components"
+            />
+          </UI.InputGroup>
+          <label className="sr-only" htmlFor="component-category">
+            Category
+          </label>
+          <UI.NativeSelect
+            id="component-category"
+            className="w-full"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            {[
+              "All components",
+              ...new Set(UI.componentCatalog.map((c) => c.category)),
+            ].map((c) => (
+              <UI.NativeSelectOption key={c}>{c}</UI.NativeSelectOption>
+            ))}
+          </UI.NativeSelect>
+          <p className="micro" aria-live="polite">
+            {filtered.length} COMPONENTS
+          </p>
+          <div className="guide-links">
+            {filtered.map((c) => (
+              <a
+                key={c.name}
+                className={c.name === selected ? "selected" : ""}
+                aria-current={c.name === selected ? "page" : undefined}
+                href={`#/components?component=${c.name}`}
+              >
+                {c.label}
+                <ArrowUpRight size={12} />
+              </a>
+            ))}
+          </div>
+        </aside>
+        <section className="guide-content">
+          {component && guide ? (
+            <>
+              <a className="back-link" href="#/components">
+                ← All components
+              </a>
+              <div className="detail-title">
+                <div>
+                  <UI.Badge variant="outline">{component.category}</UI.Badge>
+                  <h2>{component.label}</h2>
+                </div>
+                <UI.Button variant="outline" size="sm" asChild>
+                  <a
+                    href={`https://github.com/xavierloeraflores/cortex-ui-proto/blob/main/packages/ui/src/components/${component.name}.tsx`}
+                  >
+                    Source <ArrowUpRight />
+                  </a>
+                </UI.Button>
+              </div>
+              <p className="detail-description">{guide.description}</p>
+              <h3>When to use it</h3>
+              <p className="muted">{guide.usage}</p>
+              <h3>Variations</h3>
+              <ul className="variation-list">
+                {guide.variations.map((v) => (
+                  <li key={v}>
+                    <Check size={14} />
+                    {v}
+                  </li>
+                ))}
+              </ul>
+              <div className="section-heading code-heading">
+                <h3>Usage</h3>
+                <UI.Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={async () => {
+                    try {
+                      await navigator.clipboard.writeText(
+                        `import * as UI from "@cortex/ui";\n${guide.code}`,
+                      );
+                      setCopied(true);
+                    } catch {
+                      UI.toast.error(
+                        "Copy unavailable. Select the code to copy it.",
+                      );
+                    }
+                  }}
+                >
+                  <Copy />
+                  {copied ? "Copied" : "Copy code"}
+                </UI.Button>
+              </div>
+              <p className="muted">
+                Import the shared stylesheet once. Stateful examples use React's
+                useState; Form uses useForm from react-hook-form; Chart uses
+                BarChart, Bar, and XAxis from recharts.
+              </p>
+              <pre className="usage-code">
+                <code>{`import * as UI from "@cortex/ui";\n\n${guide.code}`}</code>
+              </pre>
+              <div className="section-heading">
+                <h3>
+                  Live example{" "}
+                  {panel && <span className="muted">· {panel.title}</span>}
+                </h3>
+                {panel && (
+                  <a
+                    className="back-link"
+                    href={`#/showcase?panel=panel-${panel.id}`}
+                  >
+                    See in the wall ↗
+                  </a>
+                )}
+              </div>
+              <div className="guide-demo">
+                {Demo ? (
+                  <Demo />
+                ) : (
+                  <UI.Command>
+                    <UI.CommandInput placeholder="Find an action…" />
+                    <UI.CommandList>
+                      <UI.CommandEmpty>No results.</UI.CommandEmpty>
+                      <UI.CommandItem
+                        onSelect={() => UI.toast("New project selected")}
+                      >
+                        New project
+                      </UI.CommandItem>
+                      <UI.CommandItem
+                        onSelect={() => UI.toast("Settings selected")}
+                      >
+                        Settings
+                      </UI.CommandItem>
+                    </UI.CommandList>
+                  </UI.Command>
+                )}
+              </div>
+            </>
+          ) : selected ? (
+            <UI.Empty>
+              <UI.EmptyHeader>
+                <UI.EmptyTitle>Component not found</UI.EmptyTitle>
+                <UI.EmptyDescription>
+                  Choose a component from the list.
+                </UI.EmptyDescription>
+              </UI.EmptyHeader>
+              <UI.Button asChild>
+                <a href="#/components">Browse components</a>
+              </UI.Button>
+            </UI.Empty>
+          ) : (
+            <>
+              <div className="section-heading">
+                <h2>Component library</h2>
+                <span className="muted">{filtered.length} results</span>
+              </div>
+              <div className="component-cards">
+                {filtered.map((c) => (
+                  <a
+                    className="component-card"
+                    href={`#/components?component=${c.name}`}
+                    key={c.name}
+                  >
+                    <span className="micro">{c.category}</span>
+                    <h3>
+                      {c.label}
+                      <ArrowUpRight size={16} />
+                    </h3>
+                    <p>{componentDocs[c.name].description}</p>
+                    <span className="component-variation">
+                      {componentDocs[c.name].variations[0]}
+                    </span>
+                  </a>
+                ))}
+              </div>
+              {filtered.length === 0 && (
+                <UI.Empty>
+                  <UI.EmptyHeader>
+                    <UI.EmptyTitle>No components found</UI.EmptyTitle>
+                    <UI.EmptyDescription>
+                      Try another search or category.
+                    </UI.EmptyDescription>
+                  </UI.EmptyHeader>
+                  <UI.Button
+                    variant="outline"
+                    onClick={() => {
+                      setQuery("");
+                      setCategory("All components");
+                    }}
+                  >
+                    Clear filters
+                  </UI.Button>
+                </UI.Empty>
+              )}
+            </>
+          )}
+        </section>
+      </div>
+    </>
+  );
+}

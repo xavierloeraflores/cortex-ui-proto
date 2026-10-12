@@ -1251,6 +1251,9 @@ button:focus-visible {
 .guide-links {
   max-height: 65vh;
   overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted-foreground) var(--background);
+  scrollbar-gutter: stable;
 }
 .guide-links a {
   display: flex;

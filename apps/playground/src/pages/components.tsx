@@ -10,13 +10,15 @@ export function Components({ selected }: { selected?: string }) {
   const [copied, setCopied] = useState(false);
   const component = UI.componentCatalog.find((c) => c.name === selected);
   const guide = component ? componentDocs[component.name] : undefined;
-  const filtered = UI.componentCatalog.filter(
-    (c) =>
-      (category === "All components" || category === c.category) &&
-      `${c.label} ${componentDocs[c.name].description}`
-        .toLowerCase()
-        .includes(query.toLowerCase()),
-  );
+  const filtered = UI.componentCatalog
+    .filter(
+      (c) =>
+        (category === "All components" || category === c.category) &&
+        `${c.label} ${componentDocs[c.name].description}`
+          .toLowerCase()
+          .includes(query.toLowerCase()),
+    )
+    .sort((a, b) => a.label.localeCompare(b.label, "en"));
   const panel = panels.find((p) =>
     p.components.includes(selected as ComponentName),
   );
@@ -65,7 +67,8 @@ export function Components({ selected }: { selected?: string }) {
           <p className="micro" aria-live="polite">
             {filtered.length} COMPONENTS
           </p>
-          <div className="guide-links">
+          {/* Start each filtered list at the top so earlier matches stay visible. */}
+          <div className="guide-links" key={`${category}:${query}`}>
             {filtered.map((c) => (
               <a
                 key={c.name}
